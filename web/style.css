@@ -35,7 +35,8 @@ h1{
 	display: flex;
 	display: -wekit- flex;
 	flex-direction: row;
-	justify-content:center;
+	flex-direction: -webkit- row;
+	justify-content:	center;
 }
 #first{
 	background-color: #E2E5E9;

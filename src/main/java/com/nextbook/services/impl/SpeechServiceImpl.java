@@ -20,8 +20,9 @@ public class SpeechServiceImpl implements ISpeechService {
     @Override
     public int countRepetitions(String word, String text) {
         int matches = 0;
-        Matcher matcher = Pattern.compile(word).matcher(text);
-        while (matcher.find()) matches++;
+        for(String str: text.split(" "))
+            if(str.equals(word))
+                ++matches;
         return matches;
     }
 

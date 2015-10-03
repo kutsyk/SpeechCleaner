@@ -37,6 +37,7 @@ public class IndexController{
                                            HttpServletRequest request, HttpServletResponse response) {
         word = word.toLowerCase();
         text = text.toLowerCase();
+        System.out.println(word + "  -  "+text);
         speechService.addWordToCookies(word, request, response);
         return speechService.countRepetitions(word, text)+"";
     }

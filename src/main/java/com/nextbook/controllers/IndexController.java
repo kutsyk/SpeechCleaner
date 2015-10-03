@@ -18,14 +18,11 @@ import java.util.*;
 @Controller
 public class IndexController{
 
-    private String word;
-    private String text;
     @Autowired
     private ISpeechService speechService;
 
     @RequestMapping(value = {"/"})
     public String desktop() {
-        word = null;
         return "main/index";
     }
 
@@ -34,19 +31,11 @@ public class IndexController{
         return speechService.getSavedWords(request);
     }
 
-    @RequestMapping(value = {"/savetext"})
-    public @ResponseBody String saveText(@RequestParam(value = "text", required = true) String text,
-                                         HttpServletRequest request, HttpServletResponse response) {
-        if (word==null) {
-            speechService.addWordToCookies(text, request, response);
-            return word = text;
-        } else {
-            this.text = text;
-        }
-        System.out.println(word);
-        System.out.println(text);
-        for (Cookie c:request.getCookies())
-            System.out.println(c.getValue());
+    @RequestMapping(value = {"/countWords"})
+    public @ResponseBody String countWords(@RequestParam(value = "word", required = true) String word,
+                                           @RequestParam(value = "text", required = true) String text,
+                                           HttpServletRequest request, HttpServletResponse response) {
+        speechService.addWordToCookies(text, request, response);
         return speechService.countRepetitions(word, text)+"";
     }
 

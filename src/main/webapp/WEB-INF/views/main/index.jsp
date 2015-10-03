@@ -103,11 +103,11 @@
         padding: 0;
     }
 </style>
-<button id="get_word" onclick="startButton(event)">
-    <img id="start_img" src="../../../resources/css/images/record.png" alt="Start" height ="50" width = "50">
+<button id="get_word" onclick="getWord(event)">
+    <img id="start_img" src="../../../resources/css/images/record.png" alt="Start" height="50" width="50">
 </button>
 <button id="get_text" onclick="startButton(event)">
-    <img id="start_imge" src="../../../resources/css/images/listen.png" alt="Start" height ="50" width ="50">
+    <img id="start_imge" src="../../../resources/css/images/listen.png" alt="Start" height="50" width="50">
 </button>
 <div id="word_quantity">
 </div>
@@ -139,6 +139,7 @@
 <div id="results">
     <span id="final_span" class="final"></span>
     <span id="interim_span" class="interim"></span>
+
     <p>
 </div>
 <div class="center">
@@ -339,22 +340,36 @@ function copyButton() {
     copy_info.style.display = 'inline-block';
     showInfo('');
 }
+function getWord(event) {
+    if (recognizing) {
+        recognition.stop();
+        user_word = interim_span.innerHTML;
+        console.log(user_word);
+        return;
+    }
+    final_transcript = '';
+    recognition.lang = select_dialect.value;
+    recognition.start();
+    ignore_onend = false;
+    final_span.innerHTML = '';
+    interim_span.innerHTML = '';
+    start_img.src = '../../../resources/css/images/mic-slash.gif';
+    showInfo('info_allow');
+    showButtons('none');
+    start_timestamp = event.timeStamp;
+}
+
 function startButton(event) {
     if (recognizing) {
         recognition.stop();
-        console.log(user_word.length);
-        if(user_word.length == 0)
-            user_word = interim_span.innerHTML;
-        else {
-            $.getJSON('/countWords', {
-                word: user_word,
-                text: interim_span.innerHTML,
-                ajax: 'true'
-            }, function (data) {
-                var html = data;
-                $('#word_quantity').html(html);
-            });
-        }
+        $.getJSON('/countWords', {
+            word: user_word,
+            text: interim_span.innerHTML,
+            ajax: 'true'
+        }, function (data) {
+            var html = data;
+            $('#word_quantity').html(html);
+        });
         return;
     }
     final_transcript = '';

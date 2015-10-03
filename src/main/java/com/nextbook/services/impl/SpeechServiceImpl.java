@@ -30,7 +30,7 @@ public class SpeechServiceImpl implements ISpeechService {
         for (Cookie c : request.getCookies()) {
             if (c.getName().equals("words")) {
                 if (countRepetitions(word, c.getValue()) == 0) {
-                    Cookie cookie = new Cookie("words", c.getValue() + " " + word);
+                    Cookie cookie = new Cookie("words", c.getValue() + "," + word);
                     cookie.setSecure(false);
                     response.addCookie(cookie);
                 }
@@ -48,7 +48,7 @@ public class SpeechServiceImpl implements ISpeechService {
         if (request.getCookies() != null)
             for (Cookie c : request.getCookies())
                 if (c.getName().equals("words")) {
-                    String[] words = c.getValue().split(" ");
+                    String[] words = c.getValue().split(",");
                     for (int i = 0; i < words.length; ++i)
                         if (words[i].length() > 0) res.add(words[i]);
                 }

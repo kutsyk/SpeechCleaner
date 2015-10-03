@@ -20,4 +20,13 @@ public class IndexController{
         return "main/index";
     }
 
+    @RequestMapping(value = {"/query"})
+    public @ResponseBody String Query(@RequestParam String text) {
+        if (word==null)
+            return word = text;
+        else
+            this.text = text;
+        return "result of counting";
+    }
+
 }

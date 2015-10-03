@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -25,15 +29,24 @@ public class IndexController{
         return "main/index";
     }
 
+    @RequestMapping(value = {"/savedwords"})
+    public @ResponseBody List<String> savedWords(HttpServletRequest request) {
+        return speechService.getSavedWords(request);
+    }
 
     @RequestMapping(value = {"/savetext"})
-    public @ResponseBody String saveText(@RequestParam(value = "text", required = true) String text) {
-        if (word==null)
+    public @ResponseBody String saveText(@RequestParam(value = "text", required = true) String text,
+                                         HttpServletRequest request, HttpServletResponse response) {
+        if (word==null) {
+            speechService.addWordToCookies(text, request, response);
             return word = text;
-        else
+        } else {
             this.text = text;
+        }
         System.out.println(word);
         System.out.println(text);
+        for (Cookie c:request.getCookies())
+            System.out.println(c.getValue());
         return speechService.countRepetitions(word, text)+"";
     }
 

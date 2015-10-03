@@ -1,16 +1,12 @@
 package com.nextbook.services.impl;
 
-import antlr.StringUtils;
-import com.ctc.wstx.util.StringUtil;
 import com.nextbook.services.ISpeechService;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

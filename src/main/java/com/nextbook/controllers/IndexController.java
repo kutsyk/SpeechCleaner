@@ -24,9 +24,10 @@ public class IndexController{
         return "main/index";
     }
 
-    @RequestMapping(value = {"/query"})
-    public @ResponseBody String Query(@RequestParam(value = "text", required = false) String text) {
-        if (word == null)
+
+    @RequestMapping(value = {"/savetext"})
+    public @ResponseBody String saveText(@RequestParam(value = "text", required = true) String text) {
+        if (word==null)
             return word = text;
         else
             this.text = text;

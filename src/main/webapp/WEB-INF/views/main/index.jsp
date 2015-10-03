@@ -338,8 +338,7 @@ function copyButton() {
 function getWord(event) {
     if (recognizing) {
         recognition.stop();
-        user_word = final_span.innerHTML.empty ? interim_span.innerHTML : final_span.innerHTML;
-        console.log(user_word);
+        user_word = interim_span.innerHTML ? interim_span.innerHTML : final_span.innerHTML;
         return;
     }
     final_transcript = '';
@@ -357,8 +356,11 @@ function getWord(event) {
 function startButton(event) {
     if (recognizing) {
         recognition.stop();
-        var result = final_span.innerHTML.empty ? interim_span.innerHTML : final_span.innerHTML;
-        console.log(result);
+        var result = interim_span.innerHTML ? interim_span.innerHTML : final_span.innerHTML;
+        while(user_word.indexOf('*') > -1)
+            user_word = user_word.replace('*','25A');
+        while(result.indexOf('*') > -1)
+            result = result.replace('*','25A');
         $.getJSON('/countWords', {
             word: user_word,
             text: result,

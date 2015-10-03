@@ -37,6 +37,8 @@ public class IndexController{
                                            HttpServletRequest request, HttpServletResponse response) {
         word = word.toLowerCase();
         text = text.toLowerCase();
+        word = word.replaceAll("25A","*");
+        text = text.replaceAll("25A","*");
         speechService.addWordToCookies(word, request, response);
         return speechService.countRepetitions(word, text)+"";
     }

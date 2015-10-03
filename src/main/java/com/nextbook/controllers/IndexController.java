@@ -20,8 +20,8 @@ public class IndexController{
         return "main/index";
     }
 
-    @RequestMapping(value = {"/query"})
-    public @ResponseBody String Query(@RequestParam String text) {
+    @RequestMapping(value = {"/savetext"})
+    public @ResponseBody String saveText(@RequestParam String text) {
         if (word==null)
             return word = text;
         else

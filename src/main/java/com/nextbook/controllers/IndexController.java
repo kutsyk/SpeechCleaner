@@ -6,14 +6,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 /**
- * Created by Polomani on 09.07.2015.
+ * Created by Kutsyk on 03.10.2015.
  */
 
 @Controller
-public class IndexController {
+public class IndexController{
+
+    private String word;
+    private String text;
 
     @RequestMapping(value = {"/"})
-    public String desktop(Model model, Locale locale) {
+    public String desktop() {
         return "main/index";
     }
 

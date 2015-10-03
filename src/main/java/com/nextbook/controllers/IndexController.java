@@ -26,14 +26,9 @@ public class IndexController{
     }
 
 
-    @RequestMapping(value = {"/savetext"})
-    public @ResponseBody String saveText(@RequestParam(value = "text", required = true) String text) {
-        if (word==null)
-            return word = text;
-        else
-            this.text = text;
-        System.out.println(word);
-        System.out.println(text);
+    @RequestMapping(value = {"/countWords"})
+    public @ResponseBody String countWords(@RequestParam(value = "word", required = true) String word,
+                                           @RequestParam(value = "text", required = true) String text) {
         return speechService.countRepetitions(word, text)+"";
     }
 

@@ -14,18 +14,22 @@
     * {
         font-family: Verdana, Arial, sans-serif;
     }
+
     a:link {
-        color:#000;
+        color: #000;
         text-decoration: none;
     }
+
     a:visited {
-        color:#000;
+        color: #000;
     }
+
     a:hover {
-        color:#33F;
+        color: #33F;
     }
+
     .button {
-        background: -webkit-linear-gradient(top,#008dfd 0,#0370ea 100%);
+        background: -webkit-linear-gradient(top, #008dfd 0, #0370ea 100%);
         border: 1px solid #076bd2;
         border-radius: 3px;
         color: #fff;
@@ -38,26 +42,32 @@
         text-shadow: 1px 1px 1px #076bd2;
         letter-spacing: normal;
     }
+
     .center {
         padding: 10px;
         text-align: center;
     }
+
     .final {
         color: black;
         padding-right: 3px;
     }
+
     .interim {
         color: gray;
     }
+
     .info {
         font-size: 14px;
         text-align: center;
         color: #777;
         display: none;
     }
+
     .right {
         float: right;
     }
+
     .sidebyside {
         display: inline-block;
         width: 45%;
@@ -65,16 +75,19 @@
         text-align: left;
         vertical-align: top;
     }
+
     #headline {
         font-size: 40px;
         font-weight: 300;
     }
+
     #info {
         font-size: 20px;
         text-align: center;
         color: #777;
         visibility: hidden;
     }
+
     #results {
         font-size: 14px;
         font-weight: bold;
@@ -83,9 +96,10 @@
         text-align: left;
         min-height: 150px;
     }
-    #start_button {
+
+    #get_word {
         border: 0;
-        background-color:transparent;
+        background-color: transparent;
         padding: 0;
     }
 </style>
@@ -356,7 +370,6 @@ function startButton(event) {
     ignore_onend = false;
     final_span.innerHTML = '';
     interim_span.innerHTML = '';
-        start_img.src = '../../../resources/css/images/mic-slash.gif';
     showInfo('info_allow');
     showButtons('none');
     start_timestamp = event.timeStamp;
@@ -380,9 +393,7 @@ function showButtons(style) {
     }
     current_style = style;
     copy_button.style.display = style;
-    email_button.style.display = style;
     copy_info.style.display = 'none';
-    email_info.style.display = 'none';
 }
 </script>
 </body>

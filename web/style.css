@@ -10,11 +10,6 @@
 		src: url("source/SanFranciscoText-Semibold.otf") format("opentype");
 }
 
-@media screen and (min-device-width: 1250px) {
-      h1{
-        font-size: 36px;
-}
-
 body{
 	font-family: San Francisco Text;
 }
@@ -60,7 +55,7 @@ h1{
 	height: 1000px;
 }
 
-#box{
+.box{
 	margin-top: 4rem;
 	margin-left: 6rem;
 	width: 340px;

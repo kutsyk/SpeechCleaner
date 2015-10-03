@@ -1,0 +1,77 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+@font-face {
+    font-family: San Francisco Text;
+		src: url("source/SanFranciscoText-Regular.otf") format("opentype");
+		src: url("source/SanFranciscoText-Heavy.otf") format("opentype");
+		src: url("source/SanFranciscoText-Light.otf") format("opentype");
+		src: url("source/SanFranciscoText-Semibold.otf") format("opentype");
+}
+
+@media screen and (min-device-width: 1250px) {
+      h1{
+        font-size: 36px;
+}
+
+body{
+	font-family: San Francisco Text;
+}
+
+p{
+	margin-top: 4rem;
+}
+
+button{
+	margin-top: 4rem;
+}
+
+h1{
+	font-weight: bolder;
+	margin-top: 13rem;
+	font-size: 4rem;
+}
+.center{
+	text-align: center;
+}
+
+.flex{
+	display: flex;
+	display: -wekit- flex;
+	flex-direction: row;
+	justify-content:center;
+}
+#first{
+	background-color: #E2E5E9;
+	width: 600px;
+	height: 1000px;
+}
+
+#second{
+	background-color: #B5BEC9;
+	width: 600px;
+	height: 1000px;
+}
+
+#third{
+	background-color: #7897B2;
+	width: 600px;
+	height: 1000px;
+}
+
+#box{
+	margin-top: 4rem;
+	margin-left: 6rem;
+	width: 340px;
+	height: 195px;
+	border: 10px solid #000000;
+	border-radius: 10px;
+	background: white;
+
+}
+
+.posRight{
+	margin-left: 2rem;
+	margin-top: 2rem;
+}

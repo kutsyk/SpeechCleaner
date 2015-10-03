@@ -1,0 +1,20 @@
+#first{
+	width: 600px;
+	height: 1000px;
+	background: #E2E5E9;
+}
+#second{
+	width: 600px;
+	height: 1000px;
+	background: #B5BEC9;
+}
+#third{
+	width: 600px;
+	height: 1000px;
+	background: #7897B2;
+
+}
+.container{
+	display: flex;
+	display: -webkit-flex;
+}

@@ -17,7 +17,7 @@ public class SpeechServiceImpl implements ISpeechService{
     @Override
     public int countRepetitions(String word, String text) {
         int matches = 0;
-        Matcher matcher = Pattern.compile(text, Pattern.CASE_INSENSITIVE).matcher(word);
+        Matcher matcher = Pattern.compile(word).matcher(text);
         while (matcher.find()) matches++;
         return matches;
     }

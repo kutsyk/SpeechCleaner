@@ -32,6 +32,8 @@ public class IndexController{
             return word = text;
         else
             this.text = text;
+        System.out.println(word);
+        System.out.println(text);
         return speechService.countRepetitions(word, text)+"";
     }
 

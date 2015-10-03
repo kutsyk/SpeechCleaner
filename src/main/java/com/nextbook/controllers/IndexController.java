@@ -21,6 +21,7 @@ public class IndexController{
 
     @RequestMapping(value = {"/"})
     public String desktop() {
+        word = null;
         return "main/index";
     }
 

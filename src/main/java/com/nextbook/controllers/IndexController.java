@@ -1,5 +1,7 @@
 package com.nextbook.controllers;
 
+import com.nextbook.services.ISpeechService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ public class IndexController{
 
     private String word;
     private String text;
+    @Autowired
+    private ISpeechService speechService;
 
     @RequestMapping(value = {"/"})
     public String desktop() {
@@ -21,12 +25,12 @@ public class IndexController{
     }
 
     @RequestMapping(value = {"/query"})
-    public @ResponseBody String Query(@RequestParam String text) {
-        if (word==null)
+    public @ResponseBody String Query(@RequestParam(value = "text", required = false) String text) {
+        if (word == null)
             return word = text;
         else
             this.text = text;
-        return "result of counting";
+        return speechService.countRepetitions(word, text)+"";
     }
 
 }

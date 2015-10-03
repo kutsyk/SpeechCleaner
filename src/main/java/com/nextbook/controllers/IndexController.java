@@ -35,6 +35,8 @@ public class IndexController{
     public @ResponseBody String countWords(@RequestParam(value = "word", required = true) String word,
                                            @RequestParam(value = "text", required = true) String text,
                                            HttpServletRequest request, HttpServletResponse response) {
+        word = word.toLowerCase();
+        text = text.toLowerCase();
         speechService.addWordToCookies(word, request, response);
         return speechService.countRepetitions(word, text)+"";
     }

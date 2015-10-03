@@ -7,7 +7,6 @@
 <head>
     <script src="/resources/js/jquery-2.1.3.min.js"></script>
     <script src="/resources/js/jquery.validate.min.js"></script>
-
 </head>
 <body>
 <style>
@@ -62,10 +61,6 @@
         text-align: center;
         color: #777;
         display: none;
-    }
-
-    .right {
-        float: right;
     }
 
     .sidebyside {
@@ -343,7 +338,7 @@ function copyButton() {
 function getWord(event) {
     if (recognizing) {
         recognition.stop();
-        user_word = interim_span.innerHTML.empty ? final_span.innerHTML : interim_span.innerHTML;
+        user_word = final_span.innerHTML.empty ? interim_span.innerHTML : final_span.innerHTML;
         console.log(user_word);
         return;
     }
@@ -362,7 +357,7 @@ function getWord(event) {
 function startButton(event) {
     if (recognizing) {
         recognition.stop();
-        var result = interim_span.innerHTML.empty ? final_span.innerHTML : interim_span.innerHTML;
+        var result = final_span.innerHTML.empty ? interim_span.innerHTML : final_span.innerHTML;
         console.log(result);
         $.getJSON('/countWords', {
             word: user_word,

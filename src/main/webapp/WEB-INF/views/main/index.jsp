@@ -8,17 +8,17 @@
     <script src="/resources/js/jquery-2.1.3.min.js"></script>
     <script src="/resources/js/jquery.validate.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/template_style.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
 </head>
 <body>
-<button id="get_word" onclick="getWord(event)">
-    <img id="start_img" src="../../../resources/css/images/record.png" alt="Start" height="50" width="50">
-</button>
-<button id="get_text" onclick="startButton(event)">
-    <img id="start_imge" src="../../../resources/css/images/listen.png" alt="Start" height="50" width="50">
-</button>
-<div id="word_quantity">
-</div>
+<%--<button id="get_word" onclick="getWord(event)">--%>
+<%--<img id="start_img" src="../../../resources/css/images/record.png" alt="Start" height="50" width="50">--%>
+<%--</button>--%>
+<%--<button id="get_text" onclick="startButton(event)">--%>
+<%--<img id="start_imge" src="../../../resources/css/images/listen.png" alt="Start" height="50" width="50">--%>
+<%--</button>--%>
+<%--<div id="word_quantity">--%>
+<%--</div>--%>
 <div id="info">
     <p id="info_start">Click on the microphone icon and begin speaking.</p>
 
@@ -44,12 +44,48 @@
         Upgrade to <a href="//www.google.com/chrome">Chrome</a>
         version 25 or later.</p>
 </div>
-<div id="results">
-    <span id="final_span" class="final"></span>
-    <span id="interim_span" class="interim"></span>
-</div>
 <div class="center">
 </div>
+
+<div class="flex">
+    <div id="first">
+        <div class="center">
+            <div class="flex">
+                <p>press<br>first to start<br>and<br>second time<br>to finish</p>
+                <h1>RECORD</h1>
+                <p>
+                <div id="user_result_word">
+                <%--<div id="results">--%>
+                    <%--<span id="final_span" class="final"></span>--%>
+                    <%--<span id="interim_span" class="interim"></span>--%>
+                <%--</div>--%>
+                </div>
+                </p>
+            </div>
+            <button id="get_word" type="button" name="button" onclick="getWord(event)"><img src="../../../resources/css/source/rec.svg"></button>
+            <p>*record<br> your <br> sh@#t word</p>
+        </div>
+    </div>
+    <div id="second">
+        <div class="center">
+            <h1>LISTEN</h1>
+            <button id="get_text" type="button" name="button" onclick="startButton(event)"><img src="../../../resources/css/source/lis.svg"></button>
+            <p>*let us<br>listen your<br>speech</p>
+            <div id="results">
+                <span id="final_span" class="final"></span>
+                <span id="interim_span" class="interim"></span>
+            </div>
+        </div>
+    </div>
+    <div id="third">
+        <div class="center">
+            <h1>RESULT</h1>
+            <div id="box"></div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     var user_word = '';
     var langs =
@@ -74,16 +110,16 @@
         recognition.onstart = function () {
             recognizing = true;
             showInfo('info_speak_now');
-            start_img.src = '../../../resources/css/images/mic-animate.gif';
+//            start_img.src = '../../../resources/css/images/mic-animate.gif';
         };
         recognition.onerror = function (event) {
             if (event.error == 'no-speech') {
-                start_img.src = '../../../resources/css/images/mic.gif';
+//                start_img.src = '../../../resources/css/images/mic.gif';
                 showInfo('info_no_speech');
                 ignore_onend = true;
             }
             if (event.error == 'audio-capture') {
-                start_img.src = '../../../resources/css/images/mic.gif';
+//                start_img.src = '../../../resources/css/images/mic.gif';
                 showInfo('info_no_microphone');
                 ignore_onend = true;
             }
@@ -101,7 +137,7 @@
             if (ignore_onend) {
                 return;
             }
-            start_img.src = '../../../resources/css/images/mic.gif';
+//            start_img.src = '../../../resources/css/images/mic.gif';
             if (!final_transcript) {
                 showInfo('info_start');
                 return;
@@ -158,6 +194,8 @@
         if (recognizing) {
             recognition.stop();
             user_word = interim_span.innerHTML ? interim_span.innerHTML : final_span.innerHTML;
+            console.log(user_word);
+            $('#user_result_word').html(user_word);
             return;
         }
         final_transcript = '';
@@ -166,7 +204,7 @@
         ignore_onend = false;
         final_span.innerHTML = '';
         interim_span.innerHTML = '';
-        start_img.src = '../../../resources/css/images/mic-slash.gif';
+//        start_img.src = '../../../resources/css/images/mic-slash.gif';
         showInfo('info_allow');
         showButtons('none');
         start_timestamp = event.timeStamp;
@@ -199,7 +237,7 @@
                 ajax: 'true'
             }, function (data) {
                 var html = data;
-                $('#word_quantity').html(html);
+                $('#box').html(html);
             });
             return;
         }
@@ -209,7 +247,7 @@
         ignore_onend = false;
         final_span.innerHTML = '';
         interim_span.innerHTML = '';
-        start_img.src = '../../../resources/css/images/mic-slash.gif';
+//        start_img.src = '../../../resources/css/images/mic-slash.gif';
         showInfo('info_allow');
         showButtons('none');
         start_timestamp = event.timeStamp;

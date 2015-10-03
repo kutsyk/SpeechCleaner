@@ -80,7 +80,7 @@
     <div id="third">
         <div class="center">
             <h1>RESULT</h1>
-            <div id="box"></div>
+            <div id="output" class="box"></div>
         </div>
     </div>
 </div>
@@ -237,7 +237,7 @@
                 ajax: 'true'
             }, function (data) {
                 var html = data;
-                $('#box').html(html);
+                $('#output').html(html);
             });
             return;
         }

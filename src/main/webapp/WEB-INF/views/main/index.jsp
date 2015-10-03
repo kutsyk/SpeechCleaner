@@ -188,10 +188,6 @@
                 user_word = user_word.replace('*', '25A');
             while (result.indexOf('*') > -1)
                 result = result.replace('*', '25A');
-            console.log(interim_span.innerHTML);
-            console.log(final_span.innerHTML);
-            console.log(user_word);
-            console.log(result);
             $.getJSON('/countWords', {
                 word: user_word,
                 text: result,

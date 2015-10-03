@@ -343,7 +343,7 @@ function copyButton() {
 function getWord(event) {
     if (recognizing) {
         recognition.stop();
-        user_word = interim_span.innerHTML;
+        user_word = interim_span.innerHTML.empty ? final_span.innerHTML : interim_span.innerHTML;
         console.log(user_word);
         return;
     }
@@ -362,9 +362,11 @@ function getWord(event) {
 function startButton(event) {
     if (recognizing) {
         recognition.stop();
+        var result = interim_span.innerHTML.empty ? final_span.innerHTML : interim_span.innerHTML;
+        console.log(result);
         $.getJSON('/countWords', {
             word: user_word,
-            text: interim_span.innerHTML,
+            text: result,
             ajax: 'true'
         }, function (data) {
             var html = data;

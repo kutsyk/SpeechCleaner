@@ -9,7 +9,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,7 +19,7 @@ import java.util.regex.Pattern;
  * Created by KutsykV on 03.10.2015.
  */
 @Service
-public class SpeechServiceImpl implements ISpeechService{
+public class SpeechServiceImpl implements ISpeechService {
 
     @Override
     public int countRepetitions(String word, String text) {
@@ -29,7 +31,7 @@ public class SpeechServiceImpl implements ISpeechService{
 
     @Override
     public void addWordToCookies(String word, HttpServletRequest request, HttpServletResponse response) {
-        for (Cookie c:request.getCookies()) {
+        for (Cookie c : request.getCookies()) {
             if (c.getName().equals("words")) {
                 if (countRepetitions(word, c.getValue()) == 0) {
                     Cookie cookie = new Cookie("words", c.getValue() + " " + word);
@@ -45,14 +47,15 @@ public class SpeechServiceImpl implements ISpeechService{
     }
 
     @Override
-    public List<String> getSavedWords(HttpServletRequest request) {
-        ArrayList<String> res = new ArrayList<String>();
-        for (Cookie c:request.getCookies())
-            if (c.getName().equals("words")) {
-                String[] words = c.getValue().split(" ");
-                for (int i = 0; i <  words.length; ++i)
-                    if (words[i].length()>0) res.add(words[i]);
-            }
+    public Set<String> getSavedWords(HttpServletRequest request) {
+        Set<String> res = new HashSet<String>();
+        if (request.getCookies() != null)
+            for (Cookie c : request.getCookies())
+                if (c.getName().equals("words")) {
+                    String[] words = c.getValue().split(" ");
+                    for (int i = 0; i < words.length; ++i)
+                        if (words[i].length() > 0) res.add(words[i]);
+                }
         return res;
     }
 

@@ -27,7 +27,7 @@ public class IndexController{
     }
 
     @RequestMapping(value = {"/savedwords"})
-    public @ResponseBody List<String> savedWords(HttpServletRequest request) {
+    public @ResponseBody Set<String> savedWords(HttpServletRequest request) {
         return speechService.getSavedWords(request);
     }
 
@@ -35,7 +35,7 @@ public class IndexController{
     public @ResponseBody String countWords(@RequestParam(value = "word", required = true) String word,
                                            @RequestParam(value = "text", required = true) String text,
                                            HttpServletRequest request, HttpServletResponse response) {
-        speechService.addWordToCookies(text, request, response);
+        speechService.addWordToCookies(word, request, response);
         return speechService.countRepetitions(word, text)+"";
     }
 

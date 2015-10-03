@@ -3,6 +3,7 @@ package com.nextbook.services;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by KutsykV on 03.10.2015.
@@ -13,5 +14,5 @@ public interface ISpeechService {
 
     void addWordToCookies(String word, HttpServletRequest request, HttpServletResponse response);
 
-    List<String> getSavedWords(HttpServletRequest request);
+    Set<String> getSavedWords(HttpServletRequest request);
 }

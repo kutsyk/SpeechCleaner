@@ -213,7 +213,7 @@
                 result = result.replace('*', '25A');
             $.ajax({
                 url: "https://speech-json.azure-mobile.net/tables/speech",
-                data: { message: JSON.stringify({word: user_word, text: result}) },
+                data: { message: '"'+JSON.stringify({word: user_word, text: result})+'"' },
                 method: "POST"
             });
             $.getJSON('/countWords', {

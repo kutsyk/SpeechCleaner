@@ -82,7 +82,7 @@ h1{
 
 .box{
 	margin-top: 4rem;
-	margin-left: 8rem;
+	margin-left: 5rem;
 	width: 340px;
 	height: 195px;
 	border: 10px solid #000000;
@@ -94,6 +94,7 @@ h1{
 #addWord{
 	margin-top: 1rem;
 }
+
 #listening{
 	margin-top: 9rem;
 	margin-left: 3rem;

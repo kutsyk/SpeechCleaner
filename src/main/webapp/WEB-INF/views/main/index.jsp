@@ -29,11 +29,10 @@
 <%--Upgrade to <a href="//www.google.com/chrome">Chrome</a>--%>
 <%--version 25 or later.</p>--%>
 <%--</div>--%>
-<div class="center">
+<div class="center" style="visibility: hidden;">
     <span id="final_span" class="final" style="visibility: hidden;"></span>
     <span id="interim_span" class="interim" style="visibility: hidden;"></span>
 </div>
-
 <div class="flex">
     <div id="first">
         <div class="center">
@@ -68,7 +67,6 @@
     <div id="third">
         <div class="center">
             <h1>RESULT</h1>
-
             <div id="output" class="box"></div>
         </div>
     </div>
@@ -82,8 +80,8 @@
             ];
     var select_language = langs[0][0];
     var select_dialect = langs[0][1];
-    //    showInfo('info_start');
-    var create_email = false;
+//        showInfo('info_start');
+//    var create_email = false;
     var final_transcript = '';
     var recognizing = false;
     var ignore_onend;
@@ -167,13 +165,6 @@
             return m.toUpperCase();
         });
     }
-    function copyButton() {
-        if (recognizing) {
-            recognizing = false;
-            recognition.stop();
-        }
-        showInfo('');
-    }
     function getWord(event) {
         user_word = '';
         if (recognizing) {
@@ -237,18 +228,18 @@
         showButtons('none');
         start_timestamp = event.timeStamp;
     }
-    //    function showInfo(s) {
-    //        if (s) {
-    //            for (var child = info.firstChild; child; child = child.nextSibling) {
-    //                if (child.style) {
-    //                    child.style.display = child.id == s ? 'inline' : 'none';
-    //                }
-    //            }
-    ////            info.style.visibility = 'visible';
-    //        } else {
-    ////            info.style.visibility = 'hidden';
-    //        }
-    //    }
+//        function showInfo(s) {
+//            if (s) {
+//                for (var child = info.firstChild; child; child = child.nextSibling) {
+//                    if (child.style) {
+//                        child.style.display = child.id == s ? 'inline' : 'none';
+//                    }
+//                }
+//                info.style.visibility = 'visible';
+//            } else {
+//                info.style.visibility = 'hidden';
+//            }
+//        }
     var current_style;
     function showButtons(style) {
         if (style == current_style) {

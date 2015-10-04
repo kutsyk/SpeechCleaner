@@ -30,6 +30,7 @@ h1{
 
 button{
 	border-radius: 100px;
+	outline: none;
 }
 
 .center{

@@ -71,8 +71,8 @@
                 <div class="flexCol1">
                     <div id="moveDiv">You have:</div>
                     <div id="output">
-
                     </div>
+                    <div id="wordOutput"></div>
                 </div>
             </div>
         </div>

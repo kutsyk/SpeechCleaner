@@ -62,11 +62,12 @@ button{
 	margin-left: 3rem;
 }
 
-.flexCol1{
-	display: flex;
-	display: -wekit- flex;
-	flex-direction: column;
-	flex-direction: -webkit- column;
+.flexRow1{
+		display: flex;
+    display: -wekit- flex;
+    flex-direction: row;
+    flex-direction: -webkit- row;
+    margin-left: 11rem;
 }
 
 .flex{
@@ -121,4 +122,11 @@ button{
 #output{
 	font-size: 6rem;
 	margin-left: -8rem;
+}
+
+#wordOutput{
+	font-size: 3rem;
+	margin-top: 2rem;
+	margin-left: 1rem;
+	text-align: center;
 }

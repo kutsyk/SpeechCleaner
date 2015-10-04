@@ -58,9 +58,15 @@ button{
 	display: -wekit- flex;
 	flex-direction: column;
 	flex-direction: -webkit- column;
-
 	margin-top: 7rem;
 	margin-left: 3rem;
+}
+
+.flexCol1{
+	display: flex;
+	display: -wekit- flex;
+	flex-direction: column;
+	flex-direction: -webkit- column;
 }
 
 .flex{
@@ -96,7 +102,12 @@ button{
 	border: 10px solid #000000;
 	border-radius: 10px;
 	background: white;
+}
 
+#moveDiv{
+	margin-right: 8rem;
+  margin-top: 2rem;
+  font-size: 1rem;
 }
 
 #addWord{
@@ -106,4 +117,8 @@ button{
 #listening{
 	margin-top: 9rem;
 	margin-left: 3rem;
+}
+#output{
+	font-size: 6rem;
+	margin-left: -8rem;
 }

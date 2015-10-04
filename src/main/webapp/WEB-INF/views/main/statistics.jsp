@@ -17,7 +17,7 @@
 <script>
   $(document).ready(function()
           {
-            setTimeout(function() {$("#data").tablesorter({sortList: [[1,1]]});}, 1000);
+            $("#data").tablesorter({sortList: [[1,1]]});
           }
   );
 </script>

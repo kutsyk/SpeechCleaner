@@ -30,6 +30,30 @@ h1{
 .center{
 	text-align: center;
 }
+.flexRow{
+	display: flex;
+	display: -wekit- flex;
+	flex-direction: row;
+	flex-direction: -webkit- row;
+	justify-content:	center;
+}
+
+.flexRow p{
+	margin-top: 7rem;
+	margin-right: 3rem;
+	opacity: 0.3;
+}
+
+
+.flexCol{
+	display: flex;
+	display: -wekit- flex;
+	flex-direction: column;
+	flex-direction: -webkit- column;
+
+	margin-top: 7rem;
+	margin-left: 3rem;
+}
 
 .flex{
 	display: flex;
@@ -58,7 +82,7 @@ h1{
 
 .box{
 	margin-top: 4rem;
-	margin-left: 6rem;
+	margin-left: 8rem;
 	width: 340px;
 	height: 195px;
 	border: 10px solid #000000;
@@ -67,7 +91,10 @@ h1{
 
 }
 
-.posRight{
-	margin-left: 2rem;
-	margin-top: 2rem;
+#addWord{
+	margin-top: 1rem;
+}
+#listening{
+	margin-top: 9rem;
+	margin-left: 3rem;
 }

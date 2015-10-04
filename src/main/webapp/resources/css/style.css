@@ -27,9 +27,15 @@ h1{
 	margin-top: 13rem;
 	font-size: 4rem;
 }
+
+button{
+	border-radius: 100px;
+}
+
 .center{
 	text-align: center;
 }
+
 .flexRow{
 	display: flex;
 	display: -wekit- flex;

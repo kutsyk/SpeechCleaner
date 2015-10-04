@@ -87,6 +87,8 @@
             ];
     var select_language = langs[0][0];
     var select_dialect = langs[0][1];
+    var final_span;
+    var interim_span;
     //        showInfo('info_start');
     //    var create_email = false;
     var final_transcript = '';
@@ -132,11 +134,11 @@
 //                showInfo('info_start');
                 return;
             }
-            showInfo('');
+//            showInfo('');
             if (window.getSelection) {
                 window.getSelection().removeAllRanges();
                 var range = document.createRange();
-                range.selectNode(document.getElementById('final_span'));
+//                range.selectNode(document.getElementById('final_span'));
                 window.getSelection().addRange(range);
             }
         };
@@ -150,8 +152,8 @@
                 }
             }
             final_transcript = capitalize(final_transcript);
-            final_span.innerHTML = '';//linebreak(final_transcript);
-            interim_span.innerHTML = '';//linebreak(interim_transcript);
+            final_span = linebreak(final_transcript);
+            interim_span = linebreak(interim_transcript);
             if (final_transcript || interim_transcript) {
                 showButtons('inline-block');
             }
@@ -176,7 +178,7 @@
         user_word = '';
         if (recognizing) {
             recognition.stop();
-            user_word = interim_span.innerHTML ? interim_span.innerHTML : final_span.innerHTML;
+            user_word = interim_span ? interim_span : final_span;
             console.log(user_word);
             $('#user_result_word').html('"' + user_word + '"');
             return;
@@ -185,20 +187,20 @@
         recognition.lang = select_dialect.value;
         recognition.start();
         ignore_onend = false;
-        final_span.innerHTML = '';
-        interim_span.innerHTML = '';
+        final_span = '';
+        interim_span = '';
 //        start_img.src = '../../../resources/css/images/mic-slash.gif';
 //        showInfo('info_allow');
         showButtons('none');
         start_timestamp = event.timeStamp;
     }
     function getResultForText() {
-        if (interim_span.innerHTML) {
-            if (final_span.innerHTML)
-                return final_span.innerHTML + interim_span.innerHTML;
+        if (interim_span) {
+            if (final_span)
+                return final_span + interim_span;
             else
-                return interim_span.innerHTML;
-        } else return final_span.innerHTML;
+                return interim_span;
+        } else return final_span;
     }
 
     function startButton(event) {
@@ -228,8 +230,8 @@
         recognition.lang = select_dialect.value;
         recognition.start();
         ignore_onend = false;
-        final_span.innerHTML = '';
-        interim_span.innerHTML = '';
+        final_span = '';
+        interim_span = '';
 //        start_img.src = '../../../resources/css/images/mic-slash.gif';
 //        showInfo('info_allow');
         showButtons('none');

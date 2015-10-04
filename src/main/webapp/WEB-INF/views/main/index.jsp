@@ -11,80 +11,68 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
 </head>
 <body>
-<%--<button id="get_word" onclick="getWord(event)">--%>
-<%--<img id="start_img" src="../../../resources/css/images/record.png" alt="Start" height="50" width="50">--%>
-<%--</button>--%>
-<%--<button id="get_text" onclick="startButton(event)">--%>
-<%--<img id="start_imge" src="../../../resources/css/images/listen.png" alt="Start" height="50" width="50">--%>
-<%--</button>--%>
-<%--<div id="word_quantity">--%>
+<%--<div id="info">--%>
+<%--<p id="info_start">Click on the microphone icon and begin speaking.</p>--%>
+<%--<p id="info_speak_now">Speak now.</p>--%>
+<%--<p id="info_no_speech">No speech was detected. You may need to adjust your--%>
+<%--<a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">--%>
+<%--microphone settings</a>.</p>--%>
+<%--<p id="info_no_microphone" style="display:none">--%>
+<%--No microphone was found. Ensure that a microphone is installed and that--%>
+<%--<a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">--%>
+<%--microphone settings</a> are configured correctly.</p>--%>
+<%--<p id="info_allow">Click the "Allow" button above to enable your microphone.</p>--%>
+<%--<p id="info_denied">Permission to use microphone was denied.</p>--%>
+<%--<p id="info_blocked">Permission to use microphone is blocked. To change,--%>
+<%--go to chrome://settings/contentExceptions#media-stream</p>--%>
+<%--<p id="info_upgrade">Web Speech API is not supported by this browser.--%>
+<%--Upgrade to <a href="//www.google.com/chrome">Chrome</a>--%>
+<%--version 25 or later.</p>--%>
 <%--</div>--%>
-<div id="info">
-    <p id="info_start">Click on the microphone icon and begin speaking.</p>
-
-    <p id="info_speak_now">Speak now.</p>
-
-    <p id="info_no_speech">No speech was detected. You may need to adjust your
-        <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-            microphone settings</a>.</p>
-
-    <p id="info_no_microphone" style="display:none">
-        No microphone was found. Ensure that a microphone is installed and that
-        <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-            microphone settings</a> are configured correctly.</p>
-
-    <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
-
-    <p id="info_denied">Permission to use microphone was denied.</p>
-
-    <p id="info_blocked">Permission to use microphone is blocked. To change,
-        go to chrome://settings/contentExceptions#media-stream</p>
-
-    <p id="info_upgrade">Web Speech API is not supported by this browser.
-        Upgrade to <a href="//www.google.com/chrome">Chrome</a>
-        version 25 or later.</p>
-</div>
 <div class="center">
+    <span id="final_span" class="final" style="visibility: hidden;"></span>
+    <span id="interim_span" class="interim" style="visibility: hidden;"></span>
 </div>
 
 <div class="flex">
     <div id="first">
         <div class="center">
-            <div class="flex">
+
+            <h1>RECORD</h1>
+
+            <div class="flexRow">
                 <p>press<br>first to start<br>and<br>second time<br>to finish</p>
-                <h1>RECORD</h1>
-                <p>
-                <div id="user_result_word">
-                <%--<div id="results">--%>
-                    <%--<span id="final_span" class="final"></span>--%>
-                    <%--<span id="interim_span" class="interim"></span>--%>
-                <%--</div>--%>
+                <button id="get_word" type="button" name="button" onclick="getWord(event)"><img
+                        src="../../../resources/css/source/rec.svg"></button>
+                <div class="flexCol">
+                    <div>Your<br>word:</div>
+                    <div id="user_result_word">"Your word"</div>
                 </div>
-                </p>
             </div>
-            <button id="get_word" type="button" name="button" onclick="getWord(event)"><img src="../../../resources/css/source/rec.svg"></button>
             <p>*record<br> your <br> sh@#t word</p>
         </div>
     </div>
     <div id="second">
         <div class="center">
             <h1>LISTEN</h1>
-            <button id="get_text" type="button" name="button" onclick="startButton(event)"><img src="../../../resources/css/source/lis.svg"></button>
-            <p>*let us<br>listen your<br>speech</p>
-            <div id="results">
-                <span id="final_span" class="final"></span>
-                <span id="interim_span" class="interim"></span>
+
+            <div class="flexRow">
+                <p>press<br>first to start<br>and<br>second time<br>to finish</p>
+                <button id="get_text" type="button" name="button" onclick="startButton(event)"><img
+                        src="../../../resources/css/source/lis.svg"></button>
+                <div id="listening">Listening...</div>
             </div>
+            <p>*let us<br>listen your<br>speech</p>
         </div>
     </div>
     <div id="third">
         <div class="center">
             <h1>RESULT</h1>
+
             <div id="output" class="box"></div>
         </div>
     </div>
 </div>
-
 
 <script>
     var user_word = '';
@@ -94,7 +82,7 @@
             ];
     var select_language = langs[0][0];
     var select_dialect = langs[0][1];
-    showInfo('info_start');
+    //    showInfo('info_start');
     var create_email = false;
     var final_transcript = '';
     var recognizing = false;
@@ -109,25 +97,22 @@
         recognition.interimResults = true;
         recognition.onstart = function () {
             recognizing = true;
-            showInfo('info_speak_now');
-//            start_img.src = '../../../resources/css/images/mic-animate.gif';
+//            showInfo('info_speak_now');
         };
         recognition.onerror = function (event) {
             if (event.error == 'no-speech') {
-//                start_img.src = '../../../resources/css/images/mic.gif';
-                showInfo('info_no_speech');
+//                showInfo('info_no_speech');
                 ignore_onend = true;
             }
             if (event.error == 'audio-capture') {
-//                start_img.src = '../../../resources/css/images/mic.gif';
-                showInfo('info_no_microphone');
+//                showInfo('info_no_microphone');
                 ignore_onend = true;
             }
             if (event.error == 'not-allowed') {
                 if (event.timeStamp - start_timestamp < 100) {
-                    showInfo('info_blocked');
+//                    showInfo('info_blocked');
                 } else {
-                    showInfo('info_denied');
+//                    showInfo('info_denied');
                 }
                 ignore_onend = true;
             }
@@ -139,7 +124,7 @@
             }
 //            start_img.src = '../../../resources/css/images/mic.gif';
             if (!final_transcript) {
-                showInfo('info_start');
+//                showInfo('info_start');
                 return;
             }
             showInfo('');
@@ -169,7 +154,7 @@
     }
     function upgrade() {
         get_word.style.visibility = 'hidden';
-        showInfo('info_upgrade');
+//        showInfo('info_upgrade');
     }
     var two_line = /\n\n/g;
     var one_line = /\n/g;
@@ -195,7 +180,7 @@
             recognition.stop();
             user_word = interim_span.innerHTML ? interim_span.innerHTML : final_span.innerHTML;
             console.log(user_word);
-            $('#user_result_word').html(user_word);
+            $('#user_result_word').html('"' + user_word + '"');
             return;
         }
         final_transcript = '';
@@ -205,7 +190,7 @@
         final_span.innerHTML = '';
         interim_span.innerHTML = '';
 //        start_img.src = '../../../resources/css/images/mic-slash.gif';
-        showInfo('info_allow');
+//        showInfo('info_allow');
         showButtons('none');
         start_timestamp = event.timeStamp;
     }
@@ -227,8 +212,8 @@
             while (result.indexOf('*') > -1)
                 result = result.replace('*', '25A');
             $.ajax({
-                url:"https://speech-json.azure-mobile.net/tables/speech",
-                data: { message: JSON.stringify({word:user_word, text:result}) },
+                url: "https://speech-json.azure-mobile.net/tables/speech",
+                data: { message: JSON.stringify({word: user_word, text: result}) },
                 method: "POST"
             });
             $.getJSON('/countWords', {
@@ -248,22 +233,22 @@
         final_span.innerHTML = '';
         interim_span.innerHTML = '';
 //        start_img.src = '../../../resources/css/images/mic-slash.gif';
-        showInfo('info_allow');
+//        showInfo('info_allow');
         showButtons('none');
         start_timestamp = event.timeStamp;
     }
-    function showInfo(s) {
-        if (s) {
-            for (var child = info.firstChild; child; child = child.nextSibling) {
-                if (child.style) {
-                    child.style.display = child.id == s ? 'inline' : 'none';
-                }
-            }
-            info.style.visibility = 'visible';
-        } else {
-            info.style.visibility = 'hidden';
-        }
-    }
+    //    function showInfo(s) {
+    //        if (s) {
+    //            for (var child = info.firstChild; child; child = child.nextSibling) {
+    //                if (child.style) {
+    //                    child.style.display = child.id == s ? 'inline' : 'none';
+    //                }
+    //            }
+    ////            info.style.visibility = 'visible';
+    //        } else {
+    ////            info.style.visibility = 'hidden';
+    //        }
+    //    }
     var current_style;
     function showButtons(style) {
         if (style == current_style) {

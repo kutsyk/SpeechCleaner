@@ -11,28 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
 </head>
 <body>
-<%--<div id="info">--%>
-<%--<p id="info_start">Click on the microphone icon and begin speaking.</p>--%>
-<%--<p id="info_speak_now">Speak now.</p>--%>
-<%--<p id="info_no_speech">No speech was detected. You may need to adjust your--%>
-<%--<a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">--%>
-<%--microphone settings</a>.</p>--%>
-<%--<p id="info_no_microphone" style="display:none">--%>
-<%--No microphone was found. Ensure that a microphone is installed and that--%>
-<%--<a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">--%>
-<%--microphone settings</a> are configured correctly.</p>--%>
-<%--<p id="info_allow">Click the "Allow" button above to enable your microphone.</p>--%>
-<%--<p id="info_denied">Permission to use microphone was denied.</p>--%>
-<%--<p id="info_blocked">Permission to use microphone is blocked. To change,--%>
-<%--go to chrome://settings/contentExceptions#media-stream</p>--%>
-<%--<p id="info_upgrade">Web Speech API is not supported by this browser.--%>
-<%--Upgrade to <a href="//www.google.com/chrome">Chrome</a>--%>
-<%--version 25 or later.</p>--%>
-<%--</div>--%>
-<%--<div class="center" style="visibility: hidden;">--%>
-    <%--<span id="final_span" class="final" style="visibility: hidden;"></span>--%>
-    <%--<span id="interim_span" class="interim" style="visibility: hidden;"></span>--%>
-<%--</div>--%>
+
 <div class="flex">
     <div id="first">
         <div class="center">
@@ -68,13 +47,12 @@
         <div class="center">
             <h1>RESULT</h1>
             <div class="box">
-                <div class="flexCol1">
-                    <div id="moveDiv">You have:</div>
+                <div id="moveDiv">You have:</div>
+                <div class="flexRow1">
                     <div id="output">
                     </div>
                     <div id="wordOutput"></div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
@@ -89,8 +67,6 @@
     var select_dialect = langs[0][1];
     var final_span;
     var interim_span;
-    //        showInfo('info_start');
-    //    var create_email = false;
     var final_transcript = '';
     var recognizing = false;
     var ignore_onend;
@@ -104,22 +80,17 @@
         recognition.interimResults = true;
         recognition.onstart = function () {
             recognizing = true;
-//            showInfo('info_speak_now');
         };
         recognition.onerror = function (event) {
             if (event.error == 'no-speech') {
-//                showInfo('info_no_speech');
                 ignore_onend = true;
             }
             if (event.error == 'audio-capture') {
-//                showInfo('info_no_microphone');
                 ignore_onend = true;
             }
             if (event.error == 'not-allowed') {
                 if (event.timeStamp - start_timestamp < 100) {
-//                    showInfo('info_blocked');
                 } else {
-//                    showInfo('info_denied');
                 }
                 ignore_onend = true;
             }
@@ -129,16 +100,12 @@
             if (ignore_onend) {
                 return;
             }
-//            start_img.src = '../../../resources/css/images/mic.gif';
             if (!final_transcript) {
-//                showInfo('info_start');
                 return;
             }
-//            showInfo('');
             if (window.getSelection) {
                 window.getSelection().removeAllRanges();
                 var range = document.createRange();
-//                range.selectNode(document.getElementById('final_span'));
                 window.getSelection().addRange(range);
             }
         };
@@ -161,7 +128,6 @@
     }
     function upgrade() {
         get_word.style.visibility = 'hidden';
-//        showInfo('info_upgrade');
     }
     var two_line = /\n\n/g;
     var one_line = /\n/g;
@@ -189,8 +155,6 @@
         ignore_onend = false;
         final_span = '';
         interim_span = '';
-//        start_img.src = '../../../resources/css/images/mic-slash.gif';
-//        showInfo('info_allow');
         showButtons('none');
         start_timestamp = event.timeStamp;
     }
@@ -223,6 +187,10 @@
             }, function (data) {
                 var html = data;
                 $('#output').html(html);
+                if(html == 0 || html == 1)
+                    $('#wordOutput').html(user_word);
+                else
+                    $('#wordOutput').html(user_word+'\'s');
             });
             return;
         }
@@ -232,23 +200,9 @@
         ignore_onend = false;
         final_span = '';
         interim_span = '';
-//        start_img.src = '../../../resources/css/images/mic-slash.gif';
-//        showInfo('info_allow');
         showButtons('none');
         start_timestamp = event.timeStamp;
     }
-    //        function showInfo(s) {
-    //            if (s) {
-    //                for (var child = info.firstChild; child; child = child.nextSibling) {
-    //                    if (child.style) {
-    //                        child.style.display = child.id == s ? 'inline' : 'none';
-    //                    }
-    //                }
-    //                info.style.visibility = 'visible';
-    //            } else {
-    //                info.style.visibility = 'hidden';
-    //            }
-    //        }
     var current_style;
     function showButtons(style) {
         if (style == current_style) {

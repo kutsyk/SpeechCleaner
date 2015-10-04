@@ -20,9 +20,12 @@ public class SpeechServiceImpl implements ISpeechService {
     @Override
     public int countRepetitions(String word, String text) {
         int matches = 0;
-        for(String str: text.split(" "))
-            if(str.equals(word))
-                ++matches;
+        while (text.contains(word)) {
+            System.out.println("T: "+text);
+            text = text.replaceFirst(word, "");
+            System.out.println(text);
+            ++matches;
+        }
         return matches;
     }
 

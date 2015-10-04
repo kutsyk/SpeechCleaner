@@ -175,6 +175,7 @@
                 user_word = user_word.replace('*', '25A');
             while (result.indexOf('*') > -1)
                 result = result.replace('*', '25A');
+            console.log(result);
             $.ajax({
                 url: "https://speech-json.azure-mobile.net/tables/speech",
                 data: { message: '"'+JSON.stringify({word: user_word, text: result})+'"' },

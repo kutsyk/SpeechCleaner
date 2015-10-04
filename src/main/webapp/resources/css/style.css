@@ -16,6 +16,7 @@ body{
 
 p{
 	margin-top: 4rem;
+	font-size: 1rem;
 }
 
 button{
@@ -25,7 +26,7 @@ button{
 h1{
 	font-weight: bolder;
 	margin-top: 13rem;
-	font-size: 4rem;
+	font-size: 3rem;
 }
 
 button{

@@ -11,28 +11,44 @@
 <html>
 <head>
     <title></title>
-  <script src="/resources/js/jquery-2.1.3.min.js"></script>
-  <script src="/resources/js/jquery.tablesorter.js"></script>
+    <script src="/resources/js/jquery-2.1.3.min.js"></script>
+    <script src="/resources/js/jquery.tablesorter.js"></script>
+    <script src="/resources/js/table_filter.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/resources/bootstrap-3.3.2-dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/table-filter.css"/>
+
 </head>
 <script>
-  $(document).ready(function()
-          {
-            setTimeout(function() {$("#data").tablesorter({sortList: [[1,1]]});}, 1000);
-          }
-  );
+    $(document).ready(function () {
+                setTimeout(function () {
+                    $("#dev-table").tablesorter({sortList: [
+                        [1, 1]
+                    ]});
+                }, 1000);
+            }
+    );
 </script>
 <body>
 
-  <table id="data">
+<table class="table table-hover" id="dev-table">
     <thead>
-    <tr><th>Word</th><th>Frequency</th></tr>
+    <tr>
+        <th>Word</th>
+        <th>Frequency</th>
+    </tr>
     </thead>
     <tbody>
     <c:forEach items="${data}" var="entry">
-     <tr><td>${entry.key}</td><td>${entry.value}</td></tr>
+        <tr>
+            <td>${entry.key}</td>
+            <td>${entry.value}</td>
+        </tr>
     </c:forEach>
     </tbody>
-  </table>
+</table>
 
 </body>
 </html>

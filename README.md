@@ -8,4 +8,4 @@ You can check your speech for different parasite words, that makes your pronunci
 
 So in result, you can train yourself for beautiful and creative spelling.
 
-!(MVP screenshot)[/img/mvp.png]
+![MVP screenshot](/img/mvp.png)

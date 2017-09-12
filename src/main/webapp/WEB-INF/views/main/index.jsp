@@ -1,10 +1,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <title>LinguaHack 2015 Sh*t Speach recognizer</title>
     <script src="/resources/js/jquery-2.1.3.min.js"></script>
     <script src="/resources/js/jquery.validate.min.js"></script>
 
@@ -49,10 +49,10 @@
             <div class="box">
                 <div id="moveDiv">You have:</div>
                 <div class="flexRow1">
-                    <div id="output">
-                    </div>
+                    <div id="output"></div>
                     <div id="wordOutput"></div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
@@ -60,9 +60,9 @@
 <script>
     var user_word = '';
     var langs =
-            [
-                ['English', ['en-GB']]
-            ];
+        [
+            ['English', ['en-GB']]
+        ];
     var select_language = langs[0][0];
     var select_dialect = langs[0][1];
     var final_span;
@@ -82,13 +82,13 @@
             recognizing = true;
         };
         recognition.onerror = function (event) {
-            if (event.error == 'no-speech') {
+            if (event.error === 'no-speech') {
                 ignore_onend = true;
             }
-            if (event.error == 'audio-capture') {
+            if (event.error === 'audio-capture') {
                 ignore_onend = true;
             }
-            if (event.error == 'not-allowed') {
+            if (event.error === 'not-allowed') {
                 if (event.timeStamp - start_timestamp < 100) {
                 } else {
                 }
@@ -126,20 +126,26 @@
             }
         };
     }
+
     function upgrade() {
         get_word.style.visibility = 'hidden';
     }
+
     var two_line = /\n\n/g;
     var one_line = /\n/g;
+
     function linebreak(s) {
         return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
     }
+
     var first_char = /\S/;
+
     function capitalize(s) {
         return s.replace(first_char, function (m) {
             return m.toUpperCase();
         });
     }
+
     function getWord(event) {
         user_word = '';
         if (recognizing) {
@@ -158,6 +164,7 @@
         showButtons('none');
         start_timestamp = event.timeStamp;
     }
+
     function getResultForText() {
         if (interim_span) {
             if (final_span)
@@ -175,12 +182,12 @@
                 user_word = user_word.replace('*', '25A');
             while (result.indexOf('*') > -1)
                 result = result.replace('*', '25A');
-            console.log(result);
-            $.ajax({
-                url: "https://speech-json.azure-mobile.net/tables/speech",
-                data: { message: '"'+JSON.stringify({word: user_word, text: result})+'"' },
-                method: "POST"
-            });
+//            console.log(result);
+//            $.ajax({
+//                url: "https://speech-json.azure-mobile.net/tables/speech",
+//                data: { message: '"'+JSON.stringify({word: user_word, text: result})+'"' },
+//                method: "POST"
+//            });
             $.getJSON('/countWords', {
                 word: user_word,
                 text: result,
@@ -188,10 +195,10 @@
             }, function (data) {
                 var html = data;
                 $('#output').html(html);
-                if(html == 0 || html == 1)
+                if (html == 0 || html == 1)
                     $('#wordOutput').html(user_word);
                 else
-                    $('#wordOutput').html(user_word+'\'s');
+                    $('#wordOutput').html(user_word + '\'s');
             });
             return;
         }
@@ -204,7 +211,9 @@
         showButtons('none');
         start_timestamp = event.timeStamp;
     }
+
     var current_style;
+
     function showButtons(style) {
         if (style == current_style) {
             return;

@@ -1,8 +1,7 @@
-package com.nextbook.services;
+package com.linguahack.services;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.Set;
 
 /**

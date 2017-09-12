@@ -72,27 +72,27 @@ button{
 
 .flex{
 	display: flex;
-	display: -wekit- flex;
+	display: -wekit-flex;
 	flex-direction: row;
-	flex-direction: -webkit- row;
+	flex-direction: -webkit-row;
 	justify-content:	center;
 }
 #first{
 	background-color: #E2E5E9;
 	width: 600px;
-	height: 800px;
+	height: 100%;
 }
 
 #second{
 	background-color: #B5BEC9;
 	width: 600px;
-	height: 800px;
+	height: 100%;
 }
 
 #third{
 	background-color: #7897B2;
 	width: 600px;
-	height: 800px;
+	height: 100%;
 }
 
 .box{

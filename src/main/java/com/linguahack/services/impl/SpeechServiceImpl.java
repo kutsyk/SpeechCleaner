@@ -1,6 +1,6 @@
-package com.nextbook.services.impl;
+package com.linguahack.services.impl;
 
-import com.nextbook.services.ISpeechService;
+import com.linguahack.services.ISpeechService;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by KutsykV on 03.10.2015.
@@ -21,9 +19,7 @@ public class SpeechServiceImpl implements ISpeechService {
     public int countRepetitions(String word, String text) {
         int matches = 0;
         while (text.contains(word)) {
-            System.out.println("T: "+text);
             text = text.replaceFirst(word, "");
-            System.out.println(text);
             ++matches;
         }
         return matches;
@@ -50,12 +46,15 @@ public class SpeechServiceImpl implements ISpeechService {
     public Set<String> getSavedWords(HttpServletRequest request) {
         Set<String> res = new HashSet<String>();
         if (request.getCookies() != null)
+        {
             for (Cookie c : request.getCookies())
-                if (c.getName().equals("words")) {
-                    String[] words = c.getValue().split(",");
-                    for (int i = 0; i < words.length; ++i)
-                        if (words[i].length() > 0) res.add(words[i]);
+                if (c.getName().equals("words"))
+                {
+                    for (String word: c.getValue().split(","))
+                        if (!word.isEmpty())
+                            res.add(word);
                 }
+        }
         return res;
     }
 
